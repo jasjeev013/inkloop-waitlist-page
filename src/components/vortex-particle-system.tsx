@@ -131,7 +131,7 @@ const VortexParticleSystemExact: React.FC = () => {
         if (child.geometry) child.geometry.dispose();
         if (child.material) {
           if (Array.isArray(child.material)) {
-            child.material.forEach((m) => m.dispose());
+            child.material.forEach((m:any) => m.dispose());
           } else child.material.dispose();
         }
       });
