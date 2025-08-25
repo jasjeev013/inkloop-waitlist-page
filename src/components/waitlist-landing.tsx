@@ -8,61 +8,72 @@ import VortexParticleSystem from "@/components/vortex-particle-system"
 import { Logo } from "@/components/logo"
 
 export default function WaitlistLanding() {
-
-  const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+  const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL
 
   const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [signupCount, setSignupCount] = useState(0)
-  const [loading, setLoading] = useState(false) // 🚀 loading state
+  const [alreadyExists, setAlreadyExists] = useState(false)
+  const [signupCount, setSignupCount] = useState<number | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email) {
-      setLoading(true) // start loading
-      try {
-        const res = await fetch(
-          "https://cors-anywhere.herokuapp.com/" + GOOGLE_SCRIPT_URL,
-          {
-            method: "POST",
-            body: JSON.stringify({ email }),
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        const data = await res.json()
+    e.preventDefault();
 
-        if (data.success) {
-          setIsSubmitted(true)
-          setSignupCount(data.count) // update count from sheet
-          setEmail("")
-
-          // 🎉 Confetti blast
-          confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 },
-          })
-        }
-      } catch (err) {
-        console.error("Error storing email:", err)
-      } finally {
-        setLoading(false) // stop loading
-      }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return;
     }
-  }
+
+    setLoading(true);
+    setAlreadyExists(false);
+
+    try {
+      const res = await fetch(`${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`, {
+        method: "POST",
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        setEmail("");
+        setAlreadyExists(false);
+
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      } else {
+        // treat as already exists
+        setIsSubmitted(true);
+        setAlreadyExists(true);
+
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.6 },
+        });
+      }
+
+    } catch (err) {
+      console.error("Error submitting email:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchCount = async () => {
       try {
         const res = await fetch(GOOGLE_SCRIPT_URL)
         const data = await res.json()
-        setSignupCount(data.count)
+        setSignupCount(data.count || 0)
       } catch (err) {
         console.error("Error fetching count:", err)
       }
     }
     fetchCount()
-  }, [])
+  }, [GOOGLE_SCRIPT_URL])
 
   return (
     <div className="min-h-screen min-w-screen bg-[#F0EEE6] flex flex-col relative overflow-hidden font-sf-pro">
@@ -105,13 +116,20 @@ export default function WaitlistLanding() {
                 transition={{ duration: 0.4 }}
                 className="space-y-3"
               >
-                <div className="h-12 flex items-center justify-center bg-green-50 border border-green-200 rounded-md backdrop-blur-sm">
-                  <span className="text-green-800 font-medium font-sf-pro">
-                    ✓ You're on the list!
+                <div className={`h-12 flex items-center justify-center rounded-md backdrop-blur-sm border 
+                  ${alreadyExists 
+                    ? "bg-yellow-50 border-yellow-200" 
+                    : "bg-green-50 border-green-200"}`}>
+                  <span className={`font-medium font-sf-pro 
+                    ${alreadyExists ? "text-yellow-800" : "text-green-800"}`}>
+                    {alreadyExists ? "🙌 This email is already on the list!" : "🥳 You're on the list!"}
                   </span>
                 </div>
                 <Button
-                  onClick={() => setIsSubmitted(false)}
+                  onClick={() => {
+                    setIsSubmitted(false)
+                    setAlreadyExists(false)
+                  }}
                   variant="outline"
                   className="w-full h-12 border-gray-400 backdrop-blur-sm font-sf-pro text-white hover:text-white/50"
                 >
@@ -149,26 +167,28 @@ export default function WaitlistLanding() {
             )}
           </div>
 
-          {/* Animated Signup Counter */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="pt-4"
-          >
-            <p className="text-sm text-gray-600 font-sf-pro">
-              <motion.span
-                key={signupCount}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="font-semibold text-gray-900"
+          {/* Signup Counter (reserved space) */}
+          <div className="pt-4 h-5">
+            {signupCount !== null && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="text-sm text-gray-600 font-sf-pro"
               >
-                {signupCount.toLocaleString()}
-              </motion.span>{" "}
-              people already joined
-            </p>
-          </motion.div>
+                <motion.span
+                  key={signupCount}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="font-semibold text-gray-900"
+                >
+                  {signupCount.toLocaleString()}
+                </motion.span>{" "}
+                people already joined
+              </motion.p>
+            )}
+          </div>
         </motion.div>
       </div>
 
