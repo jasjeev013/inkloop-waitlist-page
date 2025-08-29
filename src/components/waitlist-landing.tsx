@@ -9,6 +9,7 @@ import { Logo } from "@/components/logo"
 
 export default function WaitlistLanding() {
   const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -27,17 +28,21 @@ export default function WaitlistLanding() {
     setAlreadyExists(false);
 
     try {
-      const res = await fetch(`${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`, {
+      const res = await fetch(`${BACKEND_URL}/waitlist/put`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
 
       const data = await res.json();
 
-      if (data.success) {
+      if (data.result) {
         setIsSubmitted(true);
         setEmail("");
         setAlreadyExists(false);
-
+        setSignupCount((prev) => (prev !== null ? prev + 1 : 1));
         confetti({
           particleCount: 100,
           spread: 70,
@@ -63,11 +68,13 @@ export default function WaitlistLanding() {
   };
 
   useEffect(() => {
+    console.log("Fetching count from", BACKEND_URL+"/waitlist")
     const fetchCount = async () => {
       try {
-        const res = await fetch(GOOGLE_SCRIPT_URL)
+        const res = await fetch(BACKEND_URL+"/waitlist")
         const data = await res.json()
-        setSignupCount(data.count || 0)
+        console.log(data)
+        setSignupCount(data.object || 0)
       } catch (err) {
         console.error("Error fetching count:", err)
       }
