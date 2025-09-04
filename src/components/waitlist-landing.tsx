@@ -106,10 +106,10 @@ export default function WaitlistLanding() {
             transition={{ delay: 0.2 }}
             className="space-y-4"
           >
-            <p className="text-4xl font-light text-gray-900 tracking-tight font-sf-pro">
+            <p className="lg:text-4xl md:text-3xl sm:text-3xl text-2xl font-light text-gray-900 tracking-tight font-sf-pro">
               Something amazing is coming
             </p>
-            <p className="text-gray-700 text-lg leading-relaxed font-sf-pro">
+            <p className="text-gray-700 lg:text-lg md:text-sm sm:text-sm leading-relaxed font-sf-pro">
               Be the first to experience the future of productivity. Join our waitlist and get early access.
             </p>
           </motion.div>
