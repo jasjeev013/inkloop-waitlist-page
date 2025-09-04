@@ -38,7 +38,7 @@ export function Logo({ variant = "full", size = "md", className = "" }: LogoProp
       <img
         src="/logo_recolored.png"
         alt="Inkloop Logo"
-        className={`inline-block lg:mt-4 md:mt-2 mt-2  ${imageSizeClasses[size]}`}
+        className={`inline-block lg:mt-4 md:mt-3 sm:mt-2 mt-2  ${imageSizeClasses[size]}`}
       />
       <span className={`font-sf-pro text-4xl lg:text-7xl md:text-6xl sm:text-4xl mb-1`}>o</span>
       <span className="font-sf-pro">p</span>
