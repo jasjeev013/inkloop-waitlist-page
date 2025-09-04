@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://join.inkloop.app/sitemap.xml

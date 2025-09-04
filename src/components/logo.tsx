@@ -3,7 +3,6 @@ interface LogoProps {
   size?: "sm" | "md" | "lg"
   className?: string
 }
-
 export function Logo({ variant = "full", size = "md", className = "" }: LogoProps) {
   const textSizeClasses: Record<"sm" | "md" | "lg", string> = {
     sm: variant === "full" ? "text-xl sm:text-2xl" : "text-lg sm:text-xl",
@@ -14,8 +13,9 @@ export function Logo({ variant = "full", size = "md", className = "" }: LogoProp
   const imageSizeClasses: Record<"sm" | "md" | "lg", string> = {
     sm: "w-6 h-6 sm:w-8 sm:h-8",
     md: "w-8 h-8 sm:w-10 sm:h-10 md:w-9 md:h-9",
-    lg: "w-6 h-6 sm:w-6 sm:h-6 md:w-9 md:h-9 lg:w-13 lg:h-13",
+    lg: "w-7 h-5 sm:w-7 sm:h-5 md:w-11 md:h-9 lg:w-12 lg:h-10",
   }
+
 
   if (variant === "icon") {
     return (
@@ -27,7 +27,7 @@ export function Logo({ variant = "full", size = "md", className = "" }: LogoProp
           textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
         }}
       >
-        0
+        o
       </div>
     )
   }
@@ -36,11 +36,13 @@ export function Logo({ variant = "full", size = "md", className = "" }: LogoProp
     <div className={`flex items-center ${textSizeClasses[size]} font-bold text-gray-900 ${className}`}>
       <span className="font-sf-pro">inkl</span>
       <img
-        src="/inkloop.png"
+        src="/logo_recolored.png"
         alt="Inkloop Logo"
-        className={`inline-block mt-1 ${imageSizeClasses[size]}`}
+        className={`inline-block lg:mt-4 md:mt-2 mt-2  ${imageSizeClasses[size]}`}
       />
-      <span className="font-sf-pro">0p</span>
+      <span className={`font-sf-pro text-4xl lg:text-7xl md:text-6xl sm:text-4xl mb-1`}>o</span>
+      <span className="font-sf-pro">p</span>
     </div>
   )
 }
+
