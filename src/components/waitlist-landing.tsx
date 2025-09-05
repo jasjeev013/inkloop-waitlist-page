@@ -8,7 +8,6 @@ import VortexParticleSystem from "@/components/vortex-particle-system"
 import { Logo } from "@/components/logo"
 
 export default function WaitlistLanding() {
-  const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   const [email, setEmail] = useState("")
