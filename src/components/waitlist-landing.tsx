@@ -68,10 +68,10 @@ export default function WaitlistLanding() {
   };
 
   useEffect(() => {
-    console.log("Fetching count from", BACKEND_URL+"/waitlist")
+    console.log("Fetching count from", BACKEND_URL + "/waitlist")
     const fetchCount = async () => {
       try {
-        const res = await fetch(BACKEND_URL+"/waitlist")
+        const res = await fetch(BACKEND_URL + "/waitlist")
         const data = await res.json()
         console.log(data)
         setSignupCount(data.object || 0)
@@ -83,7 +83,8 @@ export default function WaitlistLanding() {
   }, [GOOGLE_SCRIPT_URL])
 
   return (
-    <div className="min-h-screen min-w-screen bg-[#F0EEE6] flex flex-col relative overflow-hidden font-sf-pro">
+    <div className="min-h-screen min-w-screen bg-[#F0EEE6] dark:bg-gray-900 flex flex-col relative overflow-hidden font-sf-pro text-gray-900 dark:text-gray-100">
+
       {/* Background */}
       <div className="absolute inset-0 z-0 opacity-40">
         <VortexParticleSystem />
@@ -124,8 +125,8 @@ export default function WaitlistLanding() {
                 className="space-y-3"
               >
                 <div className={`h-12 flex items-center justify-center rounded-md backdrop-blur-sm border 
-                  ${alreadyExists 
-                    ? "bg-yellow-50 border-yellow-200" 
+                  ${alreadyExists
+                    ? "bg-yellow-50 border-yellow-200"
                     : "bg-green-50 border-green-200"}`}>
                   <span className={`font-medium font-sf-pro 
                     ${alreadyExists ? "text-yellow-800" : "text-green-800"}`}>
@@ -134,14 +135,20 @@ export default function WaitlistLanding() {
                 </div>
                 <Button
                   onClick={() => {
-                    setIsSubmitted(false)
-                    setAlreadyExists(false)
+                    setIsSubmitted(false);
+                    setAlreadyExists(false);
+                    setEmail("");
                   }}
-                  variant="outline"
-                  className="w-full h-12 border-gray-400 backdrop-blur-sm font-sf-pro text-white hover:text-white/50"
+           
+                  className="w-full h-12 bg-gradient-to-r from-gray-900 via-gray-800 to-black hover:opacity-90 text-white font-medium shadow-lg font-sf-pro flex items-center justify-center"
                 >
                   Add Another Email
                 </Button>
+
+
+
+
+
               </motion.div>
             ) : (
               <motion.form
@@ -229,7 +236,7 @@ export default function WaitlistLanding() {
             <Linkedin size={20} />
           </a>
           <a
-            href="mailto:inloop.app@gmail.com"
+            href="mailto:hi@inkloop.app"
             target="_blank"
             className="text-gray-500 hover:text-gray-700 transition-colors"
             aria-label="Mail"
