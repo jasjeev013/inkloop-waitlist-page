@@ -80,7 +80,7 @@ export default function WaitlistLanding() {
       }
     }
     fetchCount()
-  }, [GOOGLE_SCRIPT_URL])
+  }, [BACKEND_URL])
 
   return (
     <div className="min-h-screen min-w-screen bg-[#F0EEE6] dark:bg-gray-900 flex flex-col relative overflow-hidden font-sf-pro text-gray-900 dark:text-gray-100">
