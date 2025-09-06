@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import confetti from "canvas-confetti"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Twitter, Instagram, Linkedin, Mail, Trees } from "lucide-react"
+import { Twitter, Instagram, Linkedin } from "lucide-react"
 import VortexParticleSystem from "@/components/vortex-particle-system"
 // import { Logo } from "@/components/logo"
 
