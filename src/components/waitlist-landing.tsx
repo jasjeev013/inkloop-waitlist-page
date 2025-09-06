@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Twitter, Instagram, Linkedin, Mail } from "lucide-react"
 import VortexParticleSystem from "@/components/vortex-particle-system"
-import { Logo } from "@/components/logo"
+// import { Logo } from "@/components/logo"
 
 export default function WaitlistLanding() {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
@@ -97,8 +97,8 @@ export default function WaitlistLanding() {
           transition={{ duration: 0.6 }}
           className="max-w-md w-full text-center space-y-8"
         >
-          <Logo variant="full" size="lg" className="justify-center" />
-
+          {/* <Logo variant="full" size="lg" className="justify-center" /> */}
+          <img src="/inkloop_heading.png" alt="Inkloop" className="mx-auto justify-center  w-45  sm:w-45 md:w-55 lg:w-65 " />
           {/* Hero Text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

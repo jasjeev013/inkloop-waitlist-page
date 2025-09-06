@@ -13,7 +13,7 @@ export function Logo({ variant = "full", size = "md", className = "" }: LogoProp
   const imageSizeClasses: Record<"sm" | "md" | "lg", string> = {
     sm: "w-6 h-6 sm:w-8 sm:h-8",
     md: "w-8 h-8 sm:w-10 sm:h-10 md:w-9 md:h-9",
-    lg: "w-7 h-5 sm:w-7 sm:h-5 md:w-11 md:h-9 lg:w-12 lg:h-10",
+    lg: "w-7 h-5 sm:w-7 sm:h-6 md:w-11 md:h-9 lg:w-12 lg:h-10",
   }
 
 
@@ -38,7 +38,7 @@ export function Logo({ variant = "full", size = "md", className = "" }: LogoProp
       <img
         src="/logo_recolored.png"
         alt="Inkloop Logo"
-        className={`inline-block lg:mt-4 md:mt-3 sm:mt-2 mt-2  ${imageSizeClasses[size]}`}
+        className={`inline-block lg:mt-4 md:mt-3 sm:mt-2 mt-0  ${imageSizeClasses[size]}`}
       />
       <span className={`font-sf-pro text-4xl lg:text-7xl md:text-6xl sm:text-4xl mb-1`}>o</span>
       <span className="font-sf-pro">p</span>
