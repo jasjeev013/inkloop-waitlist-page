@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import confetti from "canvas-confetti"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Twitter, Instagram, Linkedin, Mail } from "lucide-react"
+import { Twitter, Instagram, Linkedin, Mail, Trees } from "lucide-react"
 import VortexParticleSystem from "@/components/vortex-particle-system"
 // import { Logo } from "@/components/logo"
 
@@ -214,7 +214,7 @@ export default function WaitlistLanding() {
             className="text-gray-500 hover:text-gray-700 transition-colors"
             aria-label="Twitter"
           >
-            <Twitter size={20} />
+            <Twitter size={20} className="text-[#000000] hover:text-gray-700 transition-colors"  />
           </a>
           <a
             href="https://www.instagram.com/inkloop.inc"
@@ -222,25 +222,25 @@ export default function WaitlistLanding() {
             className="text-gray-500 hover:text-gray-700 transition-colors"
             aria-label="Instagram"
           >
-            <Instagram size={20} />
+            <Instagram size={20} className="text-[#000000] hover:text-gray-700 transition-colors"  />
           </a>
         </div>
         <div className="flex space-x-4">
           <a
             href="https://www.linkedin.com/company/inkloopinc"
             target="_blank"
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-[#000000] hover:text-gray-700 transition-colors"
             aria-label="LinkedIn"
           >
-            <Linkedin size={20} />
+            <Linkedin size={20} className="text-[#000000] hover:text-gray-700 transition-colors" />
           </a>
           <a
-            href="mailto:hi@inkloop.app"
+            href="https://linktr.ee/inkloop"
             target="_blank"
             className="text-gray-500 hover:text-gray-700 transition-colors"
-            aria-label="Mail"
+            aria-label="Linktree"
           >
-            <Mail size={20} />
+            <img src="/linktree.png"  alt="Linktree" className="w-4 text-[#000000] hover:text-gray-700 transition-colors"  />
           </a>
         </div>
       </footer>
